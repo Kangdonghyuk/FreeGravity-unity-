@@ -5,14 +5,18 @@ using UnityEngine;
 public class EarthGravity : MonoBehaviour
 {
     public Transform sun;
+    public Transform moon;
 
     Vector3 gravity;
-    float gravityPower;
+    Vector3 gravity2;
+    public float gravityPower;
+    public float gravityPower2;
     float distance;
 
     void Start()
     {
-        gravityPower = 50;
+        gravityPower = 15;
+        gravityPower2 = 8;
         distance = 0f;
     }
 
@@ -28,8 +32,16 @@ public class EarthGravity : MonoBehaviour
         gravity.y = (transform.position.y - sun.position.y) /
             Mathf.Abs((distance / (distance - gravityPower)));
 
-            //gravity = -gravity / gravityPower;
+        distance = Vector3.Distance(transform.position, moon.position);
 
-        transform.position = transform.position + -gravity * Time.deltaTime;
+        if(distance >= gravityPower2)
+            distance = gravityPower2;
+
+        gravity2.x = (transform.position.x - moon.position.x) /
+            Mathf.Abs((distance / (distance - gravityPower2)));
+        gravity2.y = (transform.position.y - moon.position.y) /
+            Mathf.Abs((distance / (distance - gravityPower2)));
+
+        transform.position = transform.position + (-gravity + -gravity2) * Time.deltaTime;
     }
 }
