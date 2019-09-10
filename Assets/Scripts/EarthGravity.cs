@@ -15,8 +15,6 @@ public class EarthGravity : MonoBehaviour
 
     void Start()
     {
-        gravityPower = 15;
-        gravityPower2 = 8;
         distance = 0f;
     }
 
