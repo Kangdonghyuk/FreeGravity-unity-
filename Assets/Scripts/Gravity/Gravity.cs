@@ -19,11 +19,12 @@ public class Gravity : MonoBehaviour
     void Start()
     {
         mass = rigid.mass;
+
+        rigid.AddForce(Vector3.up * 100000f);
     }
 
     void Update()
     {
-        
     }
 
     void FixedUpdate() {
@@ -33,5 +34,7 @@ public class Gravity : MonoBehaviour
             forceDirection = (PlanetMNG.I.planetList[index].transform.position - transform.position).normalized;
             rigid.AddForce(forceValue * forceDirection);
         }
+
+        
     }
 }
