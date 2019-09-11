@@ -21,8 +21,6 @@ public class CircularGravity : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         massOfPlayer = rigid.mass;
-        distance = Vector3.Distance(centerOfEarth.position, transform.position);
-        forceValue = G * (massOfEarth * massOfPlayer) / (distance*distance);
     }
 
     void Update()
