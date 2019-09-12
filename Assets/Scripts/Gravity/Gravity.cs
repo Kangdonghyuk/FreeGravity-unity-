@@ -8,7 +8,7 @@ public class Gravity : MonoBehaviour
     public float G;
     float distance;
     float forceValue;
-    Vector3 forceDirection;
+    Vector2 forceDirection;
 
     Rigidbody2D rigid;
 
@@ -18,9 +18,13 @@ public class Gravity : MonoBehaviour
 
     void Start()
     {
-        mass = rigid.mass;
+        rigid.mass = mass;
+        
+        if(PlanetMNG.I.planetList[0].gameObject == gameObject) {
+            rigid.AddForce(Vector2.right * 7000);
+        }
 
-        rigid.AddForce(Vector3.up * 100000f);
+        //rigid.AddForce(Vector3.up * 100000f);
     }
 
     void Update()
@@ -29,12 +33,17 @@ public class Gravity : MonoBehaviour
 
     void FixedUpdate() {
         for(int index = 0; index < PlanetMNG.I.planetList.Length; index++) {
-            distance = Vector3.Distance(PlanetMNG.I.planetList[index].transform.position, transform.position);
+            if(PlanetMNG.I.planetList[index].gameObject == gameObject)
+                continue;
+            distance = Vector2.Distance(PlanetMNG.I.planetList[index].transform.position, transform.position);
             forceValue = G * (PlanetMNG.I.planetList[index].mass * mass) / (distance*distance);
             forceDirection = (PlanetMNG.I.planetList[index].transform.position - transform.position).normalized;
-            rigid.AddForce(forceValue * forceDirection);
-        }
 
+            rigid.AddForce(forceDirection * forceValue);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D coll) {
         
     }
 }
