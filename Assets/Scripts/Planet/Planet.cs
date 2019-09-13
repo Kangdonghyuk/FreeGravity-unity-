@@ -13,8 +13,13 @@ public class Planet : MonoBehaviour
     Vector2 forceDirection;
     public Vector2 forceStart; 
 
+    public Transform gravityScale1, gravityScale2;
+
     void Awake() {
         rigid = GetComponent<Rigidbody2D>();
+
+        //gravityScale1 = transform.Find("GravityScale1");
+        //gravityScale2 = transform.Find("GravityScale2");
     }
 
     void Start()
@@ -22,12 +27,24 @@ public class Planet : MonoBehaviour
         rigid.gravityScale = 0;
         rigid.mass = mass;
 
-        rigid.AddForce(forceStart * 1000);
+        //rigid.AddForce(forceStart * 1000);
+    }
+
+    public void SetAttribute(float mass, float scale, bool isGravity) {
+        this.mass = mass;
+        transform.localScale = new Vector3(scale, scale, 1);
+        this.isGravity = isGravity;
+
+        gravityScale1.localScale = new Vector3(0.5f + mass / 100, 0.5f + mass / 100, 1);
+        gravityScale2.localScale = new Vector3(1.0f + mass / 50, 1.0f + mass / 50, 1);
+    }
+
+    public void AddForce(Vector2 force) {
+        rigid.AddForce(force * 1000);
     }
 
     void Update()
     {
-        
     }
 
     void FixedUpdate() {
@@ -38,7 +55,7 @@ public class Planet : MonoBehaviour
     void Gravity() {
         float distance;
 
-        for(int index = 0; index < PlanetMNG.I.planetList.Length; index++) {
+        for(int index = 0; index < PlanetMNG.I.planetList.Count; index++) {
             if(PlanetMNG.I.planetList[index].gameObject == gameObject)
                 continue;
             distance = Vector2.Distance(PlanetMNG.I.planetList[index].transform.position, transform.position);
