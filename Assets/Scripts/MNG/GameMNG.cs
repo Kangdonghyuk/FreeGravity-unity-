@@ -42,7 +42,7 @@ public class GameMNG : MonoBehaviour
 
     void CreatePlanet() {
         PlanetMNG.I.CreatePlanet(
-            mouseDownPosition, UIMNG.I.GetMass() * 1000 + 10f, UIMNG.I.GetScale() + 1f,
+            mouseDownPosition, UIMNG.I.GetMass(), UIMNG.I.GetScale(),
             (mouseUpPosition - mouseDownPosition));
     }
 }
