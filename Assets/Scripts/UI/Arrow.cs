@@ -27,8 +27,8 @@ public class Arrow : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0)) {
             isEnable = true;
-            position = Input.mousePosition;
-            transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward * 10f;
+            position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = position;
         }
         if(Input.GetMouseButtonUp(0)) {
             isEnable = false;
@@ -37,9 +37,9 @@ public class Arrow : MonoBehaviour
         }
 
         if(isEnable == true) {
-            offsetPosition = Input.mousePosition;
+            offsetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.rotation = Quaternion.Euler(0f, 0f, AngleInDeg(position, offsetPosition) + 180);
-            transform.localScale = new Vector3(Vector3.Distance(position, offsetPosition)/40f, 0.5f, 1f);
+            transform.localScale = new Vector3(Vector3.Distance(position, offsetPosition)/2f, 0.5f, 1f);
         }
 
     }
