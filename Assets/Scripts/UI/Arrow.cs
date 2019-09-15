@@ -6,6 +6,7 @@ public class Arrow : MonoBehaviour
 {
     Vector2 position;
     Vector2 offsetPosition;
+    Vector3 validPosition;
 
     bool isEnable;
 
@@ -26,9 +27,12 @@ public class Arrow : MonoBehaviour
     void Update()
     {
         if(Input.GetMouseButtonDown(0)) {
-            isEnable = true;
-            position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = position;
+            validPosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+            if(validPosition.y < 0.9 && validPosition.x < 0.9) {
+                isEnable = true;
+                position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                transform.position = position;
+            }
         }
         if(Input.GetMouseButtonUp(0)) {
             isEnable = false;

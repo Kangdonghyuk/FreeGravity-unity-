@@ -8,6 +8,7 @@ public class GameMNG : MonoBehaviour
     Vector3 mousePosition;
     Vector3 mouseDownPosition;
     Vector3 mouseUpPosition;
+    bool isCreate;
 
     void Awake() {
         I = this;
@@ -20,6 +21,7 @@ public class GameMNG : MonoBehaviour
         mouseUpPosition = Input.mousePosition;
 
         Time.timeScale = 0f;
+        isCreate = false;
     }
 
     void Update()
@@ -34,9 +36,10 @@ public class GameMNG : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && mousePosition.y < 0.9 && mousePosition.x < 0.9) {
             mouseDownPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouseDownPosition.z = 0f;
+            isCreate = true;
         }
 
-        if(Input.GetMouseButtonUp(0) && mousePosition.y < 0.9 && mousePosition.x < 0.9) {
+        if(Input.GetMouseButtonUp(0) && isCreate == true) {
             mouseUpPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouseUpPosition.z = 0f;
             CreatePlanet();
@@ -47,6 +50,7 @@ public class GameMNG : MonoBehaviour
         PlanetMNG.I.CreatePlanet(
             mouseDownPosition, UIMNG.I.GetMass(), UIMNG.I.GetScale(),
             (mouseUpPosition - mouseDownPosition));
+        isCreate = false;
     }
 
     public void StartGame() {
