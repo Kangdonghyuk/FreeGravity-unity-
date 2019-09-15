@@ -51,6 +51,5 @@ public class GameMNG : MonoBehaviour
 
     public void StartGame() {
         Time.timeScale = Mathf.Abs(Time.timeScale - 1f);
-        Debug.Log(Time.timeScale);
     }
 }

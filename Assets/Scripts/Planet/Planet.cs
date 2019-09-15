@@ -41,7 +41,7 @@ public class Planet : MonoBehaviour
     }
 
     public void AddForce(Vector2 force) {
-        rigid.AddForce(force * 1000 / mass);
+        rigid.AddForce(force * 100 * mass);
     }
 
     void Update()
