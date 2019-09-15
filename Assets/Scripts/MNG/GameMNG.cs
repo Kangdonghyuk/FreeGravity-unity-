@@ -18,10 +18,13 @@ public class GameMNG : MonoBehaviour
         mousePosition = Input.mousePosition;
         mouseDownPosition = Input.mousePosition;
         mouseUpPosition = Input.mousePosition;
+
+        Time.timeScale = 0f;
     }
 
     void Update()
     {
+
         //if(Input.GetMouseButtonDown(0))
         //    Debug.Log(Camera.main.ScreenToViewportPoint(Input.mousePosition));
         
@@ -44,5 +47,10 @@ public class GameMNG : MonoBehaviour
         PlanetMNG.I.CreatePlanet(
             mouseDownPosition, UIMNG.I.GetMass(), UIMNG.I.GetScale(),
             (mouseUpPosition - mouseDownPosition));
+    }
+
+    public void StartGame() {
+        Time.timeScale = Mathf.Abs(Time.timeScale - 1f);
+        Debug.Log(Time.timeScale);
     }
 }

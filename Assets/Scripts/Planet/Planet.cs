@@ -12,6 +12,7 @@ public class Planet : MonoBehaviour
     float forceValue;
     Vector2 forceDirection;
     public Vector2 forceStart; 
+    public Vector2 velocity;
 
     public Transform gravityScale1, gravityScale2;
 
@@ -35,16 +36,17 @@ public class Planet : MonoBehaviour
         transform.localScale = new Vector3(scale, scale, 1);
         this.isGravity = isGravity;
 
-        gravityScale1.localScale = new Vector3(0.5f + mass / 100, 0.5f + mass / 100, 1);
-        gravityScale2.localScale = new Vector3(1.0f + mass / 50, 1.0f + mass / 50, 1);
+        gravityScale1.localScale = new Vector3(0.5f + mass / 1000, 0.5f + mass / 1000, 1);
+        gravityScale2.localScale = new Vector3(1.0f + mass / 500, 1.0f + mass / 500, 1);
     }
 
     public void AddForce(Vector2 force) {
-        rigid.AddForce(force * 1000);
+        rigid.AddForce(force * 1000 / mass);
     }
 
     void Update()
     {
+        velocity = rigid.velocity;
     }
 
     void FixedUpdate() {

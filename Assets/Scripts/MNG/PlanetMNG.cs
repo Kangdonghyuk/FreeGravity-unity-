@@ -21,7 +21,6 @@ public class PlanetMNG : MonoBehaviour
         planetCount = 0;
     }
 
-
     void Update()
     {
         

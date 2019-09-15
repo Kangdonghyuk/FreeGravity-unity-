@@ -8,19 +8,10 @@ public class UIMNG : MonoBehaviour
     public static UIMNG I;
 
     public Slider massBar, scaleBar, cameraScaleBar;
+    public Text startBtnText;
 
     void Awake() {
         I = this;
-    }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
     }
 
     public float GetMass() {
@@ -33,5 +24,14 @@ public class UIMNG : MonoBehaviour
 
     public void SetCameraScale() {
         Camera.main.orthographicSize = cameraScaleBar.value;
+    }
+
+    public void ClickStartBtn() {
+        GameMNG.I.StartGame();
+        
+        if(startBtnText.text == "Start")
+            startBtnText.text = "Stop";
+        else if(startBtnText.text == "Stop")
+            startBtnText.text = "Start";
     }
 }
