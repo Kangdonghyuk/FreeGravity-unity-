@@ -9,6 +9,7 @@ public class UIMNG : MonoBehaviour
 
     public Slider massBar, scaleBar, cameraScaleBar;
     public Text startBtnText;
+    public Toggle isGravityBtn;
 
     void Awake() {
         I = this;

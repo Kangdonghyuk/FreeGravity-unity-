@@ -26,10 +26,10 @@ public class PlanetMNG : MonoBehaviour
         
     }
 
-    public void CreatePlanet(Vector3 position, float mass, float scale, Vector3 forceDirection) {
+    public void CreatePlanet(Vector3 position, float mass, float scale, Vector3 forceDirection, bool isGravity) {
         planetList.Add(Instantiate(planetPrefab, position, Quaternion.identity).GetComponent<Planet>());
         planetList[planetCount].transform.SetParent(transform);
-        planetList[planetCount].SetAttribute(mass, scale, true);
+        planetList[planetCount].SetAttribute(mass, scale, isGravity);
         planetList[planetCount].AddForce(forceDirection);
         planetCount+=1;
     }

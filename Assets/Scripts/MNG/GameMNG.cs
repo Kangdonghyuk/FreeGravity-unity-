@@ -49,7 +49,7 @@ public class GameMNG : MonoBehaviour
     void CreatePlanet() {
         PlanetMNG.I.CreatePlanet(
             mouseDownPosition, UIMNG.I.GetMass(), UIMNG.I.GetScale(),
-            (mouseUpPosition - mouseDownPosition));
+            (mouseUpPosition - mouseDownPosition), UIMNG.I.isGravityBtn.isOn);
         isCreate = false;
     }
 
