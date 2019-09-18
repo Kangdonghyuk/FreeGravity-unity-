@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Planet : MonoBehaviour
-{
+{   
     public bool isGravity;
     public float mass = 1;
     public float G = 1; // gravity constant number, generally set 1
@@ -35,6 +35,8 @@ public class Planet : MonoBehaviour
         this.mass = mass;
         transform.localScale = new Vector3(scale, scale, 1);
         this.isGravity = isGravity;
+        if(!isGravity)
+            rigid.constraints = RigidbodyConstraints2D.FreezeAll;
 
         gravityScale1.localScale = new Vector3(0.5f + mass / 1000, 0.5f + mass / 1000, 1);
         gravityScale2.localScale = new Vector3(1.0f + mass / 500, 1.0f + mass / 500, 1);

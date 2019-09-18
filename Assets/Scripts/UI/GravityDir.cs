@@ -15,18 +15,18 @@ public class GravityDir : MonoBehaviour
 
     void Update()
     {
-        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward * 10;
+        //transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward * 10;
 
         float distance;
 
         forceDirection = Vector3.zero;
         for(int index = 0; index < PlanetMNG.I.planetList.Count; index++) {
             distance = Vector2.Distance(PlanetMNG.I.planetList[index].transform.position, transform.position);
-            forceValue = G * (PlanetMNG.I.planetList[index].mass) / (distance*distance+0.001f);
-            forceDirection += (PlanetMNG.I.planetList[index].transform.position - transform.position);
+            forceValue = G * (PlanetMNG.I.planetList[index].mass * PlanetMNG.I.planetList[index].mass) / (distance*distance+0.001f);
+            forceDirection += (PlanetMNG.I.planetList[index].transform.position - transform.position) * forceValue;
         }
         
-        transform.rotation = Quaternion.Euler(0f, 0f, AngleInDeg(transform.position, forceValue * forceDirection) + 180f);
+        transform.rotation = Quaternion.Euler(0f, 0f, AngleInDeg(transform.position, forceDirection) + 180f);
     }
 
     public float AngleInRad(Vector3 vec1, Vector3 vec2) {
