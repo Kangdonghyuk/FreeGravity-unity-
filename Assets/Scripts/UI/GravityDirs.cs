@@ -13,12 +13,16 @@ public class GravityDirs : MonoBehaviour
     float G = 1000;
     bool isCalculate;
 
+    float cameraScale = 1f;
+
     void Start()
     {
+        cameraScale = Camera.main.orthographicSize / 10f;
         for(int y=0; y<8; y++) {
             for(int x = 0; x < 13; x++) {
                 gravityDirList[y*13 + x] = Instantiate(gravityDirPrefab,
-                    new Vector3(-18 + x * 3, -7 + y * 2, -20f), Quaternion.identity, transform).transform;
+                    new Vector3((-18 + x * 3) * cameraScale, (-7 + y * 2) * cameraScale, -20f), Quaternion.identity, transform).transform;
+                gravityDirList[y*13 + x].localScale = new Vector3(0.5f * cameraScale, 0.4f * cameraScale, 0f);
             }
         }
 
@@ -54,6 +58,16 @@ public class GravityDirs : MonoBehaviour
         else {
             for(int index = 0; index < 104; index++)
                 gravityDirList[index].position = Vector3.forward * 20;
+        }
+    }
+
+    public void ChangeCameraScale() {
+        cameraScale = Camera.main.orthographicSize / 10f;
+        for(int y=0; y<8; y++) {
+            for(int x = 0; x < 13; x++) {
+                gravityDirList[y*13 + x].position = new Vector3((-18 + x * 3) * cameraScale, (-7 + y * 2) * cameraScale, -1f);
+                gravityDirList[y*13 + x].localScale = new Vector3(0.5f * cameraScale, 0.4f * cameraScale, 0f);
+            }
         }
     }
 

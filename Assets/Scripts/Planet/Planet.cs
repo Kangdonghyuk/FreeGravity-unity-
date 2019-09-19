@@ -6,7 +6,7 @@ public class Planet : MonoBehaviour
 {   
     public bool isGravity;
     public float mass = 1;
-    public float G = 1; // gravity constant number, generally set 1
+    public float G = 1; 
 
     Rigidbody2D rigid;
     float forceValue;
@@ -18,17 +18,12 @@ public class Planet : MonoBehaviour
 
     void Awake() {
         rigid = GetComponent<Rigidbody2D>();
-
-        //gravityScale1 = transform.Find("GravityScale1");
-        //gravityScale2 = transform.Find("GravityScale2");
     }
 
     void Start()
     {
         rigid.gravityScale = 0;
         rigid.mass = mass;
-
-        //rigid.AddForce(forceStart * 1000);
     }
 
     public void SetAttribute(float mass, float scale, bool isGravity) {
